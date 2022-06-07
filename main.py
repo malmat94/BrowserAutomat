@@ -1,10 +1,13 @@
+#add the module for locally inserting webdriver
+
 from selenium import webdriver
 import time
+import os
 
 options = webdriver.ChromeOptions()     # accesing chrome web browser
 driver = webdriver.Chrome(executable_path="C:/Users/Maliccy/AppData/Local/Programs/chromedriver.exe", chrome_options = options)     # accesing web driver
 
-first_site = driver.get("https://rezerwacja.gdansk.uw.gov.pl:8445/qmaticwebbooking/#/")     # accesing site from addres via chrome browser
+first_site = driver.get("https://www.otodom.pl/pl/oferty/wynajem/mieszkanie/gdansk?priceMax=3500&areaMin=60&roomsNumber=%5BTHREE%2CFOUR%2CFIVE%5D")     # accesing site from addres via chrome browser
 # print(driver.page_source)     # web page code
 print(driver.title)
 driver.get_screenshot_as_file("paszport.png")     # getting screenshot from a page
