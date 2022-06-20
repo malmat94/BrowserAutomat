@@ -6,9 +6,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import ActionChains
 
 import time
+from pathlib import Path
 import os
 from pynput import *
 from pyautogui import *
+
+import shutil
 
 options = webdriver.ChromeOptions()
 options.add_argument("--disable-notifications")
@@ -28,18 +31,19 @@ driver.get(url)
 # click_1 = driver.find_element(By.XPATH, '/html/body/div/div/div[1]/div/div/div[1]/div[1]/div/div/div/div[2]/div/div/div/div/div/div/div[3]/div/div')
 # click_1.click()
 
+time.sleep(2)
 click_1 = click(132, 661) #Lokalizacja urzędu
 
 time.sleep(1)
 click_2 = click(126, 565) #Loklaizacja typu wniosku
 
-time.sleep(1)
+time.sleep(0.5)
 click_3 = click(267, 689) #Loklaizacja dodania dorosłego
 
-time.sleep(1)
+time.sleep(0.5)
 click_4 = click(454, 677) #Lokalizacja dodania dzieci
 
-time.sleep(1)
+time.sleep(0.5)
 click_5 = click(454, 677) #Lokalizacja dodania dzieci
 
 time.sleep(1)
@@ -47,34 +51,34 @@ click_6 = click(230, 900) #Loklazacja "wybierz termin"
 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
 time.sleep(1)
-driver.get_screenshot_as_file("paszport_1.png")  #screenshot of dates page for 1st month
+screen_1 = "paszport_1.png"
+driver.get_screenshot_as_file(screen_1)  #screenshot of dates page for 1st month
 
 time.sleep(1)
 click_7 = click(848, 625) #Loklazacja "następny miesiąc"
-driver.get_screenshot_as_file("paszport_2.png")    #screenshot of dates page for 2nd month
-
-#Waiting for the webpage to load
-# try:
-#     click_2 = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, '4fe2df1ac02036b7096beb9b80b8e0e8924c3c282eb992fc83b5a3977ddd20b1')))
-#     click_2.click()
-#
-# except:
-#     print("Kurwa no nie ma...")
+screen_2 = "paszport_2.png"
+driver.get_screenshot_as_file(screen_2)    #screenshot of dates page for 2nd month
 
 
-# clicking the button
-# click_2 = driver.find_element(By.TAG_NAME, 'radio-72')
-# click_2.click()
+folder_path = "D:/Użytkownicy/Maliccy/Dokumenty/Mateusz/PROGRAMOWANIE/Python/Projekty/BrowserAutomat/PassPort/"
+s_1_destination = Path(folder_path + screen_1)
+s_2_destination = Path(folder_path + screen_2)
 
-# closing the popup
-time.sleep(1)
+if s_1_destination.is_file():
+    os.unlink(s_1_destination)
+    shutil.move(screen_1, folder_path)
+else:
+    shutil.move(screen_1, folder_path)
 
-# driver.execute_script('el = document.elementFromPoint(47, 457); el.click();')
-# # driver.switch_to.alert.dismiss()
-# ActionChains(driver).move_to_element_with_offset(driver.find_element_by_xpath("//button[contains(text(),'Przejdź dalej')]"), 200, 0).click().perform()
+
+if s_2_destination.is_file():
+    os.unlink(s_2_destination)
+    shutil.move(screen_2, folder_path)
+else:
+    shutil.move(screen_2, folder_path)
 
 time.sleep(3)
-# driver.quit()
+driver.quit()
 
 
 
