@@ -3,6 +3,7 @@ __pycache__/
 resources data/
 Sites_codes/
 PassPort/
+*.png
 test.py
 
 

@@ -50,12 +50,29 @@ time.sleep(1)
 click_6 = click(230, 900) #Loklazacja "wybierz termin"
 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
+
+def confident(loc, conf):
+    if loc == None:
+        conf -= 0.05
+
+    return conf
+
+conf = 1
+loc_1 = None
+while loc_1 == None:
+    loc_1 = locateOnScreen('brak.png', confidence = conf)   # Finding content of "brak.png" on screen
+    conf = confident(loc_1,conf)
+    print(loc_1)
+    print(conf)
+
 time.sleep(1)
 screen_1 = "paszport_1.png"
 driver.get_screenshot_as_file(screen_1)  #screenshot of dates page for 1st month
 
 time.sleep(1)
 click_7 = click(848, 625) #Loklazacja "następny miesiąc"
+loc_2= locateOnScreen('brak.png', confidence = 0.95)   # Finding content of "brak.png" on screen
+
 screen_2 = "paszport_2.png"
 driver.get_screenshot_as_file(screen_2)    #screenshot of dates page for 2nd month
 
@@ -76,6 +93,18 @@ if s_2_destination.is_file():
     shutil.move(screen_2, folder_path)
 else:
     shutil.move(screen_2, folder_path)
+
+
+if loc_1 != None:
+    print(loc_1)
+    print("W tym miesiącu dupa...")
+
+print("")
+
+if loc_2 != None:
+    print( loc_2)
+    print("W przyszłym też...")
+
 
 time.sleep(3)
 driver.quit()
